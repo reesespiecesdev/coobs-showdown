@@ -7,7 +7,7 @@
  */
 
 import * as mysql from 'mysql2';
-import * as pg from 'pg';
+//import * as pg from 'pg';
 
 export type BasicSQLValue = string | number | null;
 export type SQLRow = { [k: string]: BasicSQLValue };
@@ -150,7 +150,7 @@ export interface ResultRow { [k: string]: BasicSQLValue }
 
 export const connectedDatabases: Database[] = [];
 
-export abstract class Database<Pool extends mysql.Pool | pg.Pool = mysql.Pool | pg.Pool, OkPacket = unknown> {
+export abstract class Database<Pool extends mysql.Pool = mysql.Pool, OkPacket = unknown> {
 	connection: Pool;
 	prefix: string;
 	type = '';
@@ -376,38 +376,5 @@ export class MySQLDatabase extends Database<mysql.Pool, mysql.OkPacket> {
 	}
 	override escapeId(id: string) {
 		return mysql.escapeId(id);
-	}
-}
-
-export class PGDatabase extends Database<pg.Pool, { affectedRows: number | null }> {
-	override type = 'pg' as const;
-	constructor(config: pg.PoolConfig) {
-		super(config ? new pg.Pool(config) : null!);
-	}
-	override _resolveSQL(query: SQLStatement): [query: string, values: BasicSQLValue[]] {
-		let sql = query.sql[0];
-		const values = [];
-		let paramCount = 0;
-		for (let i = 0; i < query.values.length; i++) {
-			const value = query.values[i];
-			if (query.sql[i + 1].startsWith('`') || query.sql[i + 1].startsWith('"')) {
-				sql = sql.slice(0, -1) + this.escapeId(`${value}`) + query.sql[i + 1].slice(1);
-			} else {
-				paramCount++;
-				sql += `$${paramCount}` + query.sql[i + 1];
-				values.push(value);
-			}
-		}
-		return [sql, values];
-	}
-	override _query(query: string, values: BasicSQLValue[]) {
-		return this.connection.query(query, values).then(res => res.rows);
-	}
-	override _queryExec(query: string, values: BasicSQLValue[]) {
-		return this.connection.query<never>(query, values).then(res => ({ affectedRows: res.rowCount }));
-	}
-	override escapeId(id: string) {
-		// @ts-expect-error @types/pg really needs to be updated
-		return pg.escapeIdentifier(id);
 	}
 }

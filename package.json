@@ -71,7 +71,7 @@
     "@types/cloud-env": "^0.2.2",
     "@types/node": "^14.18.63",
     "@types/nodemailer": "^6.4.4",
-    "@types/pg": "^8.6.5",
+    "@types/pg": "^8.15.6",
     "@types/sockjs": "^0.3.33",
     "@types/sodium-native": "^2.3.9",
     "eslint": "^9.31.0",
