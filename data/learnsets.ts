@@ -99917,6 +99917,19 @@ export const Learnsets: import('../sim/dex-species').LearnsetDataTable = {
 			willowisp: ["9M"],
 		},
 	},
+	cornst: {
+		learnset: {
+			rage: ["9L1"],
+			focusblast: ["9L2"],
+			present: ["9L2"],
+			takedown: ["9L4"],
+			rest: ["9L5"],
+			protect: ["9L5"],
+			doubleslap: ["9L7"],
+			bellydrum: ["9L50"],
+			agility: ["9L70"]
+		}
+	},
 	pokestarsmeargle: {
 		eventData: [
 			{generation: 5, level: 60, gender: "M", abilities: ["owntempo"], moves: ["mindreader", "guillotine", "tailwhip", "gastroacid"]},

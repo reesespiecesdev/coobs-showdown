@@ -6080,6 +6080,10 @@ export const FormatsData: import('../sim/dex-species').SpeciesFormatsDataTable =
 		isNonstandard: "CAP",
 		tier: "Illegal",
 	},
+	cornst: {
+		isNonstandard: "Past",
+		tier: "(OU)"
+	},
 	pokestarsmeargle: {
 		isNonstandard: "Custom",
 		tier: "Illegal",

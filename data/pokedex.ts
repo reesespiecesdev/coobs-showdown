@@ -20334,6 +20334,17 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 		battleOnly: "Ramnarok",
 		gen: 9,
 	},
+	cornst: {
+		num: -79,
+		name: "Cornst",
+		types: ["Normal", "Fighting"],
+		gender: "M",
+		baseStats: { hp: 80, atk: 52, def: 73, spa: 78, spd: 70, spe: 50 },
+		abilities: {0: "Insomnia", H: "Protean"},
+		heightm: 1.73,
+		weightkg: 72.6,
+		eggGroups: ["Undiscovered"]
+	},
 	// NOTE: PokeStar "formes" are not actually formes and thus do not have a formeOrder
 	pokestarsmeargle: {
 		num: -5000,
